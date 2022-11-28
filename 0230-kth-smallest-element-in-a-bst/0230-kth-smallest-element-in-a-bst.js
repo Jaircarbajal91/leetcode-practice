@@ -23,6 +23,7 @@ var kthSmallest = function(root, k) {
         
         count++
         if (count === k) result = node.val
+        if (result) return
         
         if (node.right) {
             dfs(node.right)       
