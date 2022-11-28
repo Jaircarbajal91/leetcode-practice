@@ -12,13 +12,18 @@
  */
 var levelOrder = function(root) {
     if (!root) return []
-    let result = {}
+    let result = []
     let queue = [root]
     root.level = 0
     while(queue.length) {
         let curr = queue.shift()
-        if (result[curr.level]) result[curr.level].push(curr.val)
-        else result[curr.level] = [curr.val]
+        
+        if (Array.isArray(result[curr.level])) {
+            result[curr.level].push(curr.val)    
+        } else {
+            result.push([curr.val])
+        }
+        
         
         if (curr.left) {
             curr.left.level = curr.level + 1
@@ -29,5 +34,5 @@ var levelOrder = function(root) {
             queue.push(curr.right)
         }
     }
-    return Object.values(result);
+    return result;
 };
