@@ -6,9 +6,13 @@
 var searchMatrix = function(matrix, target) {
     let row = [];
     for (let i = 0; i < matrix.length; i++) {
-        let firstInRow = matrix[i][0]
-        let lastInRow = matrix[i][matrix[i].length - 1]
-        if (target >= firstInRow && target <= lastInRow) row = matrix[i]
+        let currRow = matrix[i]
+        let firstInRow = currRow[0]
+        let lastInRow = currRow[currRow.length - 1]
+        if (target >= firstInRow && target <= lastInRow) {
+            row = matrix[i]
+            break;
+        }
     }
     let start = 0;
     let end = row.length - 1;
