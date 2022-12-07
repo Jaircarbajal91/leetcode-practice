@@ -10,7 +10,7 @@ var maxArea = function(height) {
         const area = Math.min(left, right) * (r - l);
         maxArea = Math.max(maxArea, area)
         if (left < right) l++
-        else if (right <= left) r--;
+        else r--;
     }
     return maxArea;
 };
