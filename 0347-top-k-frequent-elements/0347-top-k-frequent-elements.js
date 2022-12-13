@@ -4,18 +4,18 @@
  * @return {number[]}
  */
 var topKFrequent = function(nums, k) {
-    let storage = {};
-    let result = []
+    let map = {}
     for (let num of nums) {
-        if (num in storage) {
-            storage[num]++;
-        } else {
-            storage[num] = 1;
-        }
+        if (num in map) map[num]++
+        else map[num] = 1
     }
-    let sortedObj = Object.keys(storage).sort((a, b) => storage[b] - storage[a])
-    for (let i = 0; i < k; i++) {
-        result.push(sortedObj[i])
-    }
-    return result;
+    let entries = Object.entries(map)
+    let result = entries
+        .sort((a, b) => a[1] - b[1])
+        .slice(entries.length - k)
+        .reduce((resultArr, arr) => {
+            resultArr.push(Number(arr[0]))
+            return resultArr
+        }, [])
+    return result
 };
