@@ -4,18 +4,21 @@
  * @return {number[]}
  */
 var topKFrequent = function(nums, k) {
-    let map = {}
-    for (let num of nums) {
-        if (num in map) map[num]++
-        else map[num] = 1
+    const freqMap = new Map();
+    const bucket = [];
+    const result = [];
+    
+    for(let num of nums) {
+        freqMap.set(num, (freqMap.get(num) || 0) + 1);
     }
-    let entries = Object.entries(map)
-    let result = entries
-        .sort((a, b) => a[1] - b[1])
-        .slice(entries.length - k)
-        .reduce((resultArr, arr) => {
-            resultArr.push(Number(arr[0]))
-            return resultArr
-        }, [])
-    return result
+    
+    for(let [num, freq] of freqMap) {
+        bucket[freq] = (bucket[freq] || new Set()).add(num);
+    }
+    
+    for(let i = bucket.length-1; i >= 0; i--) {
+        if(bucket[i]) result.push(...bucket[i]);
+        if(result.length === k) break;
+    }
+    return result;
 };
