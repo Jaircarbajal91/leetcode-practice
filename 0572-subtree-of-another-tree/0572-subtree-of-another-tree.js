@@ -12,21 +12,15 @@
  * @return {boolean}
  */
 var isSubtree = function(root, subRoot) {
-    let queue = [root];
-    while (queue.length) {
-        let curr = queue.shift()
-        if ((curr.val === subRoot.val) && sameTree(curr, subRoot)) return true
-        if (curr.left) queue.push(curr.left)
-        if (curr.right) queue.push(curr.right)
-    }
-    return false
+    if (!root) return false
+    if (isSameTree(root, subRoot)) return true
+    return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot)
 };
 
-const sameTree = (p, q) => {
-    if (!q && !p) return true
-    if (!q || !p) return false
-    if (q.val !== p.val) return false
-    if (!sameTree(p.left, q.left)) return false
-    if (!sameTree(p.right, q.right)) return false
-    return true
+const isSameTree = (tree1, tree2) =>  {
+    if (!tree1 && !tree2) return true
+    if (!tree1 || !tree2) return false
+    
+    if (tree1.val !== tree2.val) return false
+    return isSameTree(tree1.left, tree2.left) && isSameTree(tree1.right, tree2.right)
 }
