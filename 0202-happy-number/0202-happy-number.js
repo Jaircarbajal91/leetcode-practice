@@ -12,7 +12,4 @@ var isHappy = function(n) {
     return true
 };
 
-const splitAndAddNumber = n => {
-    let splitString = n.toString().split('')
-    return splitString.reduce((result, num) => result += Math.pow(num, 2), 0)
-}
+const splitAndAddNumber = n => n.toString().split('').reduce((result, num) => result += Math.pow(num, 2), 0)
