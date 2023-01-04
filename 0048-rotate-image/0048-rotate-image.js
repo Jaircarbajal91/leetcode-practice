@@ -4,7 +4,6 @@
  */
 var rotate = function(matrix) {
     const transposed = transpose(matrix)
-    console.log(transposed)
     transposed.forEach(row => {
         row.reverse()
     })
