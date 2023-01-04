@@ -12,5 +12,5 @@ class Solution:
                 val = stone1 - stone2
                 heapq.heappush(stones, val)
         if len(stones):
-            return stones.pop(0) * -1
+            return stones[0] * -1
         return 0
