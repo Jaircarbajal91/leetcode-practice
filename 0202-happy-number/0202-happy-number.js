@@ -3,16 +3,16 @@
  * @return {boolean}
  */
 var isHappy = function(n) {
-    let storage = {}
-    while(n !== 1) {
-        n = splitAndAddNumber(n)
-        if (n in storage) return false
-        storage[n] = n
+    let set = new Set();
+    
+    while(true) {
+        n = n.toString().split('').reduce((sum, num) => {
+            sum += Math.pow(num, 2)
+            return sum
+        }, 0)
+        if(n === 1) return true
+        if (set.has(n)) break
+        set.add(n)
     }
-    return true
-};
-
-const splitAndAddNumber = n => {
-    let splitString = n.toString().split('')
-    return splitString.reduce((result, num) => result += Math.pow(num, 2), 0)
+    return false;
 }
