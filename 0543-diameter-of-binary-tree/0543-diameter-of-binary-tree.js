@@ -11,19 +11,17 @@
  * @return {number}
  */
 var diameterOfBinaryTree = function(root) {
-    if (!root) return 0;
-
-    let lheight = maxHeight(root.left)
-    let rheight = maxHeight(root.right)
+    if (!root) return 0
+    let left = maxDepth(root.left)
+    let right = maxDepth(root.right)
     
-    let ldiameter = diameterOfBinaryTree(root.left)
-    let rdiameter = diameterOfBinaryTree(root.right)
+    let l = diameterOfBinaryTree(root.left)
+    let r = diameterOfBinaryTree(root.right)
     
-    return Math.max(lheight + rheight, Math.max(ldiameter, rdiameter))
-    
+    return Math.max(Math.max(l, r), left + right)
 };
 
-let maxHeight = (root) => {
+const maxDepth = (root) => {
     if (!root) return 0
-    return 1 + Math.max(maxHeight(root.left), maxHeight(root.right))
+    return 1 + Math.max(maxDepth(root.left), maxDepth(root.right))
 }
