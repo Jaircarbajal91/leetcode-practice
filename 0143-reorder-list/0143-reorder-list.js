@@ -10,12 +10,14 @@
  * @return {void} Do not return anything, modify head in-place instead.
  */
 var reorderList = function(head) {
-    const [firstHalf, secondHalf] = splitList(head)
-
-    return merge(firstHalf, reverse(secondHalf))
+    const [first, second] = findMid(head)
+    let reversed = reverse(second)
+    console.log(first, second)
+    let merged = merge(first, reversed)
+    return merged
 };
 
-const splitList = (head) => {
+const findMid = (head) => {
     let [slow, fast] = [head, head]
     let dummy = new ListNode()
     let firstHalf = dummy
@@ -30,15 +32,15 @@ const splitList = (head) => {
 }
 
 const reverse = (head) => {
-    let result = null;
     let curr = head
+    let prev = null
     while(curr) {
         let temp = curr.next
-        curr.next = result
-        result = curr
+        curr.next = prev
+        prev = curr
         curr = temp
     }
-    return result
+    return prev
 }
 
 const merge = (list1, list2) => {
@@ -47,10 +49,11 @@ const merge = (list1, list2) => {
     while(list1 && list2) {
         dummy.next = list1
         list1 = list1.next
-        dummy.next.next = list2
+        dummy = dummy.next
+        dummy.next = list2
         list2 = list2.next
-        dummy = dummy.next.next
+        dummy = dummy.next
     }
     dummy.next = list1 || list2
-    return result
+    return result.next
 }
