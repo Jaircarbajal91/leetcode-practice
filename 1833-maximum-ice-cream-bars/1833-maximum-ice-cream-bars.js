@@ -10,8 +10,7 @@ var maxIceCream = function(costs, coins) {
         if (coin <= coins) {
             count++
             coins -= coin
-        }
-        if (coins === 0) break
+        } else break
     }
     return count
 };
