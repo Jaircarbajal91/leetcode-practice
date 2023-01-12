@@ -3,10 +3,15 @@
  * @return {number}
  */
 var findDuplicate = function(nums) {
-    const sorted = nums.slice().sort((a, b) => a - b)
-    for (let i = 0; i < sorted.length - 1; i++) {
-        let next = sorted[i + 1];
-        if (sorted[i] === next) return next
+    let duplicate = -1
+    for (let num of nums) {
+        let cur = Math.abs(num)
+        if (nums[cur] < 0) {
+            duplicate = cur
+            break
+        }
+        nums[cur] = -nums[cur]
     }
-    return -1
+    nums = nums.map(num => Math.abs(num)) 
+    return duplicate
 };
