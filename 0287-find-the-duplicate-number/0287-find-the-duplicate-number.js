@@ -2,16 +2,13 @@
  * @param {number[]} nums
  * @return {number}
  */
-var findDuplicate = function(nums) {
-    let duplicate = -1
-    for (let num of nums) {
-        let cur = Math.abs(num)
-        if (nums[cur] < 0) {
-            duplicate = cur
-            break
-        }
-        nums[cur] = -nums[cur]
+var findDuplicate = function(nums, cur) {
+    function store(nums, cur) {
+        if (cur === nums[cur]) return cur
+    
+        let next = nums[cur]
+        nums[cur] = cur    
+        return store(nums, next)
     }
-    nums = nums.map(num => Math.abs(num)) 
-    return duplicate
+    return store(nums, 0)
 };
