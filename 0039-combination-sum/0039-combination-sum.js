@@ -10,7 +10,7 @@ var combinationSum = function(candidates, target) {
             result.push(path.slice())
             return
         }
-        if (i > candidates.length - 1) return
+        if (i >= candidates.length) return
         if (pathSum > target) return
         
         path.push(candidates[i])
@@ -20,7 +20,6 @@ var combinationSum = function(candidates, target) {
         path.pop()
         pathSum -= candidates[i]
         dfs(i + 1, path, pathSum)
-        return 
     }
     dfs(0, [], 0)
     return result
