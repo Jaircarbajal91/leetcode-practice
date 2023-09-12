@@ -12,6 +12,4 @@ class Solution:
           stack.pop()
           continue
         stack.append(paren)
-      if len(stack):
-        return False
-      return True
+      return len(stack) == 0
